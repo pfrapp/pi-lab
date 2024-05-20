@@ -18,15 +18,14 @@ def capture_h265_stream():
     # cap = cv2.VideoCapture(f'rtsp://{camera_username}:{camera_password}@{camera_ip}/streamX')
     cap = cv2.VideoCapture(f'http://raspberrypi.local:10001')
 
-    while not cap.isOpened():
-        ...
-
+    idx = 0
     while cap.isOpened():
         ret, frame = cap.read()
         if frame is not None:
-            cv2.imwrite(f"{image_filename}.png", frame)
+            cv2.imwrite(f"{image_filename}_{idx}.png", frame)
             print(f'Successfully wrote a file')
-        break
+            idx += 1
+
 
     cap.release()
     return frame
