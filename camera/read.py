@@ -6,6 +6,7 @@
 # %% Import cv2
 
 import cv2
+import matplotlib.pyplot as plt
 
 # %%
 
@@ -22,9 +23,12 @@ def capture_h265_stream():
     while cap.isOpened():
         ret, frame = cap.read()
         if frame is not None:
-            cv2.imwrite(f"{image_filename}_{idx}.png", frame)
+            # cv2.imwrite(f"{image_filename}_{idx}.png", frame)
             print(f'Successfully wrote a file')
             idx += 1
+
+            if idx > 10:
+                break
 
 
     cap.release()
@@ -36,4 +40,13 @@ def capture_h265_stream():
 frame = capture_h265_stream()
 
 
+# %%
+
+# Revert RGB
+frame=frame[:,:,::-1]
+
+plt.figure('frame')
+plt.clf()
+plt.imshow(frame)
+plt.show()
 # %%
