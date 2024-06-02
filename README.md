@@ -200,6 +200,44 @@ MariaDB [(none)]> exit
 Bye
 ```
 
+#### PHP
+
+Still in a root shell, issue
+```
+$ apt install php libapache2-mod-php php-mysql
+```
+
+#### Apache virtual host
+
+Very important: Adapt the local /etc/hosts (that is, on the MacBook) so that it contains
+```
+...
+
+192.168.1.143 amber.local
+```
+and make sure that the amber.conf file of Apache contains
+```
+ServerName amber.local
+ServerAlias www.amber.local
+```
+
+You write the conf files in sites-available.
+You check them in sites-enabled.
+No need to change the /etc/hosts on the pi.
+
+#### WordPress
+
+Follow the instructions given at https://developer.wordpress.org/advanced-administration/before-install/howto-install/
+
+I copied everything into /var/www/amber/wordpress.
+Also, I changed the owner via chown -R to root.
+I created a wp-config.php based on the sample and entered the MariaDB database name, user name, and password.
+
+Then I navigated to amber.local and finished the wordpress setup (see screenshot).
+
+Log in via http://amber.local/wp-login.php
+
+
 
 ### Interface connecting the pi to a Cortex M4
 
